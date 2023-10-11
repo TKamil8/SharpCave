@@ -13,7 +13,7 @@ while (true)
     Console.WriteLine("Provide sign, second player (or write 'quit' to end game):");
     string? secondPlayerSign = Console.ReadLine();
 
-    if (secondPlayerSign =="quit")
+    if (secondPlayerSign == "quit")
     {
         break;
     }
@@ -22,15 +22,9 @@ while (true)
     {
         Console.WriteLine("It's a draw!");
     }
-    else if (firstPlayerSign == "rock" && secondPlayerSign == "scissors")
-    {
-        Console.WriteLine("First player won!");
-    }
-    else if (firstPlayerSign == "paper" && secondPlayerSign == "rock")
-    {
-        Console.WriteLine("First player won!");
-    }
-    else if (firstPlayerSign == "scissors" && secondPlayerSign == "paper")
+    else if ((firstPlayerSign == "rock" && secondPlayerSign == "scissors")
+        || (firstPlayerSign == "paper" && secondPlayerSign == "rock")
+        || (firstPlayerSign == "scissors" && secondPlayerSign == "paper"))
     {
         Console.WriteLine("First player won!");
     }
