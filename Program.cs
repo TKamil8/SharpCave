@@ -1,5 +1,8 @@
 ﻿Console.WriteLine("Let's play Rock-Paper-Scissors!");
 
+Console.WriteLine("Do you have anyone to play wuth? (yes/no)");
+bool playingWithOtherHuman = (Console.ReadLine()?.ToLower().Trim() == "yes");
+
 string[] availableSigns = { "rock", "paper", "scissors" };
 const string EndGameCommand = "quit";
 int firstPlayerPoints = 0;
@@ -12,8 +15,8 @@ while (keepPlaying)
 {
     for (int roundNumber = 1; roundNumber <= expectedRoundNumber; roundNumber++)
     {
-Console.WriteLine($" Round {roundNumber}");
-        
+        Console.WriteLine($" Round {roundNumber}");
+
         string? firstPlayerSign;
         do
         {
@@ -27,17 +30,28 @@ Console.WriteLine($" Round {roundNumber}");
             break;
         }
 
-        string? secondPlayerSign;
-        do
-        {
-            Console.WriteLine($"Provide sign, second player (or write '{EndGameCommand}' to end game):");
-            secondPlayerSign = Console.ReadLine()?.ToLower().Trim();
-        } while (!availableSigns.Contains(secondPlayerSign) && secondPlayerSign != EndGameCommand);
 
-        if (secondPlayerSign == EndGameCommand)
+        string? secondPlayerSign;
+        if (playingWithOtherHuman)
         {
-            keepPlaying = false;
-            break;
+            do
+            {
+                Console.WriteLine($"Provide sign, second player (or write '{EndGameCommand}' to end game):");
+                secondPlayerSign = Console.ReadLine()?.ToLower().Trim();
+            } while (!availableSigns.Contains(secondPlayerSign) && secondPlayerSign != EndGameCommand);
+
+            if (secondPlayerSign == EndGameCommand)
+            {
+                keepPlaying = false;
+                break;
+            }
+        }
+        else
+        {
+            Random rng = new Random();
+            int randomSignIndex = rng.Next(availableSigns.Length);
+            secondPlayerSign = availableSigns[randomSignIndex];
+            Console.WriteLine($"Second player provided {secondPlayerSign}");
         }
 
         int secondPlayerSignIndex = Array.IndexOf(availableSigns, secondPlayerSign);
